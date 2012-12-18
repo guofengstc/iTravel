@@ -12,3 +12,22 @@
   </div>
 <% end %>
 </div>
+
+
+<h2>Friends</h2>
+<ul>
+  <% for friendship in current_user.friendships %>
+    <li>
+      <%=h friendship.friend.name %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+
+<h2>Friended by Users</h2>
+<ul>
+  <% for user in current_user.inverse_friends %>
+    <li><%=h user.name %></li>
+  <% end %>
+</ul>
