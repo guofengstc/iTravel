@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217160802) do
+ActiveRecord::Schema.define(:version => 20121218034129) do
+
+  create_table "footprint_images", :force => true do |t|
+    t.integer  "footprint_id"
+    t.string   "src"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "footprint_images", ["footprint_id"], :name => "index_footprint_images_on_footprint_id"
+
+  create_table "footprints", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "desc"
+    t.string   "longitude"
+    t.string   "latitude"
+    t.string   "address"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "footprints", ["user_id"], :name => "index_footprints_on_user_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
