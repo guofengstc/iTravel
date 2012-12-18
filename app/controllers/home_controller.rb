@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   
   def index
      @strangers = Kaminari.paginate_array(current_user.strangers).page params[:page] 
+     async_create_user(current_user)
   end
   
   def email    
@@ -18,6 +19,10 @@ class HomeController < ApplicationController
     @user = User.create(userinfo)
     @user.save!
     redirect_to root_url 
+  end
+  
+  def async_create_user(user)
+    Resque.enqueue(BlogCrawler, session["token_info"])
   end
 
 end
