@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:jameszhan/omniauth-weibo.git
-  revision: fc7b95249f54111fb46eae40f5ddaeb5d46838a2
+  revision: 0cb47961b48d7541c0735432cdcd223586be6976
   specs:
     omniauth-weibo (0.0.1)
       omniauth (~> 1.0)
