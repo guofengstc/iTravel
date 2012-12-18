@@ -47,4 +47,19 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def self.save(userinfo, provider)
+    user = User.where(:provider => provider, :uid => userinfo.id).first
+    unless user
+      user = User.new(
+        name: userinfo.name,
+        provider: provider,
+        uid: userinfo.id,
+        email: nil,
+        password: Devise.friendly_token[0, 20]        
+      )   
+      user.save!(:validate => false)   
+    end
+    user
+  end
 end
