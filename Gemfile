@@ -7,7 +7,7 @@ gem 'omniauth'
 
 gem 'kaminari'
 
-gem 'resque'
+gem 'resque', :require => 'resque/server'
 
 
 gem 'haml-rails'

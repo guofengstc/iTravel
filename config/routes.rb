@@ -1,6 +1,8 @@
 ITravel::Application.routes.draw do
   
   #mount Resque::Server.new, :at => "/resque"
+
+  resources :friendships
   
   resque_constraint = lambda do |request|
     request.env['warden'].authenticate!({ :scope => :admin })
