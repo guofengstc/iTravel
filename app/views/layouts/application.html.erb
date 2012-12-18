@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= h(yield(:title) || "ITravel") %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <ul class="hmenu">
+    <%#= render 'devise/menu/registration_items' %>
+    <%#= render 'devise/menu/login_items' %>
+  </ul>
+  <div id="user_nav">
+    <% if user_signed_in? %>
+      Welcome <%= current_user.name %>! <%= link_to "logout", destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to "GitHub", user_omniauth_authorize_path(:github) %>
+      <%= link_to "Weibo", user_omniauth_authorize_path(:weibo) %> 
+      <%= link_to('Login', new_user_session_path)  %>      
+    <% end %>
+  </div>
+
+<%= yield %>
+
+</body>
+</html>
