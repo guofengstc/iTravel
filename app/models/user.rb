@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   
   def all_friends
-    friends | inverse_friendships 
+    friends | inverse_friends
   end
   
   def is_friend?(user)
-    friends.include?(user) || inverse_friendships.include?(user) 
+    friends.include?(user) || inverse_friends.include?(user) 
   end  
   
   def self.find_with_omniauth(auth, signed_in_resource=nil)
