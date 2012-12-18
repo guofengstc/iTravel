@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     friends | inverse_friends
   end
   
-  def is_friend?(user)
+  def friend_with?(user)
     friends.include?(user) || inverse_friends.include?(user) 
   end  
   
