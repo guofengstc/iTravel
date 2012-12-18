@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   
+
   def all_friends
     friends | inverse_friends
   end
@@ -27,6 +28,10 @@ class User < ActiveRecord::Base
   def is_friend?(user)
     friends.include?(user) || inverse_friends.include?(user) 
   end  
+  
+  def strangers
+   User.where("id != ?", self.id) - all_friends
+  end
   
   def self.find_with_omniauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first

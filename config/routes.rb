@@ -1,6 +1,13 @@
 ITravel::Application.routes.draw do
   
-  resources :friendships
+  #mount Resque::Server.new, :at => "/resque"
+  
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate!({ :scope => :admin })
+  end
+  constraints resque_constraint do
+    mount Resque::Server.new, :at => "/resque"
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   

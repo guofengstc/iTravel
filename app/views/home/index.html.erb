@@ -1,8 +1,8 @@
 
 <% title "User List" %>
 
-<div id="users">
-<% for user in @users %>
+<div id="strangers">
+<% for user in @strangers %>
   <div class="user">
     <p>
       <strong><%=h user.name %></strong>
@@ -11,6 +11,7 @@
     </p>
   </div>
 <% end %>
+<%= paginate @strangers, :window => 2 %>
 </div>
 
 
