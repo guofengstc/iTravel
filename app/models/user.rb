@@ -28,10 +28,18 @@ class User < ActiveRecord::Base
   def close_friends
     friends & inverse_friends  
   end
-  
-  def is_friend?(user)
+
+  def close_friend_with?(user)
     friends.include?(user) || inverse_friends.include?(user) 
-  end  
+  end 
+  
+  def friend_with?(user)
+    friends.include?(user)
+  end 
+  
+  def inverse_friend_with?(user)
+    inverse_friends.include?(user) 
+  end
   
   def strangers
    User.where("id != ?", self.id) - all_friends

@@ -1,9 +1,12 @@
+require 'hashie'
+require 'json'
+require 'faraday'
 class HomeController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-     @strangers = Kaminari.paginate_array(current_user.strangers).page params[:page] 
-     async_create_user(current_user)
+    @strangers = Kaminari.paginate_array(current_user.strangers).page params[:page] 
+    async_create_users(current_user)
   end
   
   def email    
@@ -21,8 +24,8 @@ class HomeController < ApplicationController
     redirect_to root_url 
   end
   
-  def async_create_user(user)
-    Resque.enqueue(BlogCrawler, session["token_info"])
+  def async_create_users(user)
+    Resque.enqueue(UserCrawler, session["token_info"], user.id)
   end
 
 end

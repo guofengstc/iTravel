@@ -5,5 +5,10 @@ Then, if you are using "attr_accessible" in your User Model, remember to add :pr
 
     attr_accessible :provider, :uid, :name
     
+prepare your redis directory /opt/var/db/redis    
+    rake redis:start    
     
-QUEUE=* rake resque:work
+    QUEUE=* rake resque:work
+
+For Development
+    VVERBOSE=1 QUEUE=* rake environment resque:work

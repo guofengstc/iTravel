@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20121218034129) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id", :unique => true
+  add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => ""
